@@ -18,6 +18,11 @@ export default class KeyCard3Screen extends Component {
     this.onSubmitcardNumber = this.onSubmitcardNumber.bind(this);
     this.onSubmitcvv = this.onSubmitcvv.bind(this);
 
+    this.ShipFedex = this.ShipFedex.bind(this);
+    this.ShipOvernight = this.ShipOvernight.bind(this);
+    this.ShipPickup = this.ShipPickup.bind(this);
+    this.ShipUsps = this.ShipUsps.bind(this);
+
     this.nameRef = this.updateRef.bind(this, 'name');
     this.cardNumberRef = this.updateRef.bind(this, 'cardNumber');
     this.cvvRef = this.updateRef.bind(this, 'cvv');
@@ -49,6 +54,30 @@ export default class KeyCard3Screen extends Component {
     this.setState({
       currentYear: currentYear,
       yearArr: arr
+    });
+  }
+
+  ShipFedex() {
+    this.setState({
+      shippingOption: "FedEX"
+    });
+  }
+
+  ShipOvernight() {
+    this.setState({
+      shippingOption: "overnight"
+    });
+  }
+
+  ShipUsps() {
+    this.setState({
+      shippingOption: "usps"
+    });
+  }
+
+  ShipPickup() {
+    this.setState({
+      shippingOption: "pickup"
     });
   }
 
@@ -147,6 +176,10 @@ export default class KeyCard3Screen extends Component {
     let { name = 'name', cardNumber = 'house'} = data;
     let saveCard;
     let shippingOption;
+    let fedex;
+    let overnight;
+    let usps;
+    let pickup;
 
     if (this.state.saveCard) {
       saveCard = 
@@ -160,17 +193,91 @@ export default class KeyCard3Screen extends Component {
       </TouchableOpacity>;
   }
 
-  if (this.state.shippingOption ==="FexEX") {
-    shippingOption =
-      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.cardSave}>
-        <Image source={require('../../img/check-box-empty.png')} style={{width: 27, height: 27}}/>
+  if (this.state.shippingOption ==="FedEX") {
+    fedex =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    overnight =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    usps =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    pickup =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
       </TouchableOpacity>;
   } else if (this.state.shippingOption === "overnight") {
-
+    fedex =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    overnight =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    usps =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    pickup =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
   } else if (this.state.shippingOption === "usps") {
-
+    fedex =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    overnight =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    usps =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    pickup =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
   } else if (this.state.shippingOption === "pickup") {
-
+    fedex =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    overnight =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    usps =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    pickup =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+  } else {
+    fedex =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    overnight =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    usps =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
+    pickup =
+      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+      </TouchableOpacity>;
   }
 
     return (
@@ -290,7 +397,7 @@ export default class KeyCard3Screen extends Component {
                 selectedValue={this.state.month}
                 style={{ height: 60, width: '50%'}}
                 onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue})}>
-                <Picker.Item label="Select One" value="Select One" />
+                <Picker.Item label="Select Month" value="Select Month" />
                 <Picker.Item label="January" value="January" />
                 <Picker.Item label="February" value="February" />
                 <Picker.Item label="March" value="March" />
@@ -310,6 +417,7 @@ export default class KeyCard3Screen extends Component {
                 selectedValue={this.state.currentYear}
                 style={{ height: 60, width: '50%'}}
                 onValueChange={(itemValue, itemIndex) => this.setState({currentYear: itemValue})}>
+                  <Picker.Item label="Select Year" value="Select Year"/>
                 {this.state.yearArr.map((year, index) => (
                   <Picker.Item label={year} value={year} key={index} />
                 ))}
@@ -321,24 +429,24 @@ export default class KeyCard3Screen extends Component {
                   <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
             </View>
 
-            <View>// NEEDS TO BE COMPLETED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            <View>
               <View style={{paddingLeft: 25}}>
                 <Text style={{fontSize: 16, color: 'black'}}>Select Shipping</Text>
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
-                    {shippingOption}
+                    {fedex}
                     <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
-                    {shippingOption}
+                    {overnight}
                     <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
-                    {shippingOption}
+                    {usps}
                     <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
-                    {shippingOption}
+                    {pickup}
                     <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
               </View>
             </View>

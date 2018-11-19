@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Platform, Text, View, TouchableOpacity, Image } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import DeviceInfo from 'react-native-device-info';

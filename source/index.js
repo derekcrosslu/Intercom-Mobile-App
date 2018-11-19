@@ -1,9 +1,9 @@
-import React, {Component, PureComponent} from 'react';
+import React, { Component, PureComponent } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, Modal } from 'react-native';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
-import {RtcEngine, AgoraView} from 'react-native-agora'
+import { RtcEngine, AgoraView } from 'react-native-agora'
 
 export default class RNAgoraExample extends Component {
 
