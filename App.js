@@ -100,9 +100,15 @@ export default class App extends Component {
       if (value !== null) {
         let isTrue = JSON.parse(value).PersistingLogin;
         if (isTrue) {
+          console.log('istrue ran');
           this.setState({
             loggedIn: true
           });
+        } else {
+          console.log('was not true');
+          this.setState({
+            loggedIn: false
+          }); 
         } 
       } else {
         this.setState({
@@ -117,9 +123,9 @@ export default class App extends Component {
 
   render() { 
     let Page;
-    if (!this.state.loggedIn) {
+    if (this.state.loggedIn === false) {
       Page = <Login login={this.logIn} rememberMeChange={this.rememberMe} rememberMe={this.state.rememberMe}/>;
-    } else if (this.state.loggedIn) {
+    } else if (this.state.loggedIn === true) {
       Page = <Navigation screenProps={{logOut: this.logOut}}/>;
     } else {
       Page = <View></View>;
