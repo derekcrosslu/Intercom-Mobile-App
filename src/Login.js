@@ -26,9 +26,15 @@ export default class Login extends Component {
         secureTextEntry: true,
         wifiMac: 'Not yet taken'
     }
+    this.getDeviceInfo = this.getDeviceInfo.bind(this);
   }
 
   componentWillMount() {
+    this.getDeviceInfo();
+  }
+
+
+  getDeviceInfo(){
     DeviceInfo.getMACAddress().then(mac => {
       this.setState({
         wifiMac: mac
@@ -36,9 +42,8 @@ export default class Login extends Component {
     })
     .catch((error) => {
       console.log(error);
-    })
+    }); 
   }
-
 
   onFocus() {
     let { errors = {} } = this.state;

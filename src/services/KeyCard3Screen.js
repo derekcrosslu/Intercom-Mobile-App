@@ -188,95 +188,95 @@ export default class KeyCard3Screen extends Component {
       </TouchableOpacity>;
   } else {
       saveCard =
-      <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.cardSave}>
-        <Image source={require('../../img/check-box-empty.png')} style={{width: 27, height: 27}}/>
+      <TouchableOpacity style={{padding: 5, paddingRight: 15}} onPress={this.cardSave}>
+        <Image source={require('../../img/check-box-empty.png')} style={{width: 30, height: 30}}/>
       </TouchableOpacity>;
   }
 
   if (this.state.shippingOption ==="FedEX") {
     fedex =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
-        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     overnight =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     usps =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     pickup =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
   } else if (this.state.shippingOption === "overnight") {
     fedex =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     overnight =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
-        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     usps =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     pickup =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
   } else if (this.state.shippingOption === "usps") {
     fedex =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     overnight =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     usps =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
-        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     pickup =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
   } else if (this.state.shippingOption === "pickup") {
     fedex =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     overnight =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     usps =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     pickup =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
-        <Image source={require('../../img/filled-circle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/filled-circle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
   } else {
     fedex =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipFedex}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     overnight =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipOvernight}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     usps =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipUsps}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
     pickup =
       <TouchableOpacity style={{padding: 5, paddingRight: 18}} onPress={this.ShipPickup}>
-        <Image source={require('../../img/emptycircle.png')} style={{width: 27, height: 27}}/>
+        <Image source={require('../../img/emptycircle.png')} style={{width: 22, height: 22}}/>
       </TouchableOpacity>;
   }
 
@@ -430,25 +430,25 @@ export default class KeyCard3Screen extends Component {
             </View>
 
             <View>
-              <View style={{paddingLeft: 25}}>
-                <Text style={{fontSize: 16, color: 'black'}}>Select Shipping</Text>
+              <View style={{paddingLeft: 30}}>
+                <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>Select Shipping</Text>
               </View>
-              <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
+              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom: 3, marginTop: 3}}onPress={this.ShipFedex}>
                     {fedex}
-                    <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
-              </View>
-              <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
+                    <Text style={{color: 'black', fontSize: 16}}>FedEX</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom: 3}} onPress={this.ShipOvernight}>
                     {overnight}
-                    <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
-              </View>
-              <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
+                    <Text style={{color: 'black', fontSize: 16}}>Overnight</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom:3}} onPress={this.ShipUsps}>
                     {usps}
-                    <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
-              </View>
-              <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25}}>
+                    <Text style={{color: 'black', fontSize: 16}}>USPS</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom:3}} onPress={this.ShipPickup}>
                     {pickup}
-                    <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
-              </View>
+                    <Text style={{color: 'black', fontSize: 16}}>Pickup</Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
           

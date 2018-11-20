@@ -7,7 +7,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: undefined,
       rememberMe: true,
       PersistingLogin: false
     }
@@ -103,8 +103,11 @@ export default class App extends Component {
           this.setState({
             loggedIn: true
           });
-        }
+        } 
       } else {
+        this.setState({
+          loggedIn: false
+        }); 
         console.log('The key you searched for doesnt exist');
       }
      } catch (error) {
@@ -116,8 +119,10 @@ export default class App extends Component {
     let Page;
     if (!this.state.loggedIn) {
       Page = <Login login={this.logIn} rememberMeChange={this.rememberMe} rememberMe={this.state.rememberMe}/>;
-    } else {
+    } else if (this.state.loggedIn) {
       Page = <Navigation screenProps={{logOut: this.logOut}}/>;
+    } else {
+      Page = <View></View>;
     }
 
     return (
