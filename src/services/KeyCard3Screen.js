@@ -27,6 +27,20 @@ export default class KeyCard3Screen extends Component {
     this.cardNumberRef = this.updateRef.bind(this, 'cardNumber');
     this.cvvRef = this.updateRef.bind(this, 'cvv');
 
+    this.firstRef = this.updateRef.bind(this, "first");
+    this.lastRef = this.updateRef.bind(this, "last");
+    this.addressRef = this.updateRef.bind(this, "address");
+    this.cityRef = this.updateRef.bind(this, "city");
+    this.stateLiveRef = this.updateRef.bind(this, 'stateLive');
+    this.zipCodeRef = this.updateRef.bind(this, "zipCode");
+
+    this.onSubmitFirst = this.onSubmitFirst.bind(this);
+    this.onSubmitLast = this.onSubmitLast.bind(this);
+    this.onSubmitAddress = this.onSubmitAddress.bind(this);
+    this.onSubmitCity = this.onSubmitAddress.bind(this);
+    this.onSubmitStateLive = this.onSubmitStateLive.bind(this);
+    this.onSubmitzipCode = this.onSubmitzipCode.bind(this);
+
     this.state = {
       card: "New",
       provider: 'Select Card Type',
@@ -37,7 +51,13 @@ export default class KeyCard3Screen extends Component {
       currentYear: '1232',
       yearArr: ["2018"],
       saveCard: false,
-      shippingOption: false
+      shippingOption: false,
+      first: "",
+      last: "",
+      address: "",
+      city: "",
+      stateLive: "",
+      zipCode: ""
     }
   }
 
@@ -55,6 +75,7 @@ export default class KeyCard3Screen extends Component {
       currentYear: currentYear,
       yearArr: arr
     });
+    console.log(this.props.navigation.state.params, 'key card 3 screen logs');
   }
 
   ShipFedex() {
@@ -89,7 +110,6 @@ export default class KeyCard3Screen extends Component {
   }
 
   onFocus() {
-
     let { errors = {} } = this.state;
 
     for (let name in errors) {
@@ -104,7 +124,7 @@ export default class KeyCard3Screen extends Component {
   }
 
   onChangeText(text) {
-    ['name', 'cardNumber', 'cvv']
+    ['name', 'cardNumber', 'cvv', 'first','last', 'address', 'city', 'stateLive', 'zipCode']
       .map((name) => ({ name, ref: this[name] }))
       .forEach(({ name, ref }) => {
         if (ref.isFocused()) {
@@ -129,12 +149,35 @@ export default class KeyCard3Screen extends Component {
     this.cvv.blur();
   }
 
+  onSubmitFirst() {
+    this.last.focus();
+  }
+
+  onSubmitLast() {
+    this.address.focus();
+  }
+
+  onSubmitAddress() {
+    this.city.focus();
+  }
+
+  onSubmitCity() {
+    this.stateLive.focus();
+  }
+
+  onSubmitStateLive() {
+    this.zipCode.focus();
+  }
+
+  onSubmitzipCode() {
+    this.zipCode.blur();
+  }
 
   onSubmit() {
     let errors = {};
     let submitToServer = {};
     
-    ['name', 'cardNumber', 'cvv']
+    ['name', 'cardNumber', 'cvv', 'first','last', 'address', 'city', 'stateLive', 'zipCode']
       .forEach((name) => {
         let value = this[name].value();
         submitToServer[name] = value;
@@ -450,20 +493,77 @@ export default class KeyCard3Screen extends Component {
                     <Text style={{color: 'black', fontSize: 16}}>Pickup</Text>
               </TouchableOpacity>
             </View>
-          </ScrollView>
+
           
-          {/* <View style={{width: '80%', paddingLeft: '10%'}}>
+          <View style={{width: '80%', paddingLeft: '10%'}}>
             <TextField
-              ref={this.cvvRef}
-              value={data.cvv}
+              ref={this.firstRef}
+              value={data.first}
               autoCorrect={false}
               enablesReturnKeyAutomatically={true}
               onFocus={this.onFocus}
               onChangeText={this.onChangeText}
-              onSubmitEditing={this.onSubmitcvv}
+              onSubmitEditing={this.onSubmitFirst}
               returnKeyType='next'
-              label='CVV'
-              error={errors.cvv}
+              label='First Name'
+              error={errors.first}
+              fontSize={20}
+              titleFontSize={14}
+              labelFontSize={20}
+              maxLength={20}
+              textColor="black"
+              baseColor="black"
+              labelTextStyle={{fontWeight: 'bold'}}
+            />
+            <TextField
+              ref={this.lastRef}
+              value={data.last}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitLast}
+              returnKeyType='next'
+              label='Last Name'
+              error={errors.last}
+              fontSize={20}
+              titleFontSize={14}
+              labelFontSize={20}
+              maxLength={20}
+              textColor="black"
+              baseColor="black"
+              labelTextStyle={{fontWeight: 'bold'}}
+            />
+            <TextField
+              ref={this.addressRef}
+              value={data.address}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitAddress}
+              returnKeyType='next'
+              label='Address'
+              error={errors.address}
+              fontSize={20}
+              titleFontSize={14}
+              labelFontSize={20}
+              maxLength={20}
+              textColor="black"
+              baseColor="black"
+              labelTextStyle={{fontWeight: 'bold'}}
+            />
+            <TextField
+              ref={this.cityRef}
+              value={data.city}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitCity}
+              returnKeyType='next'
+              label='City'
+              error={errors.city}
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
@@ -472,7 +572,46 @@ export default class KeyCard3Screen extends Component {
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
             />
-          </View> */}
+            <TextField
+              ref={this.stateLiveRef}
+              value={data.stateLive}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitStateLive}
+              returnKeyType='next'
+              label='State'
+              error={errors.stateLive}
+              fontSize={20}
+              titleFontSize={14}
+              labelFontSize={20}
+              maxLength={20}
+              textColor="black"
+              baseColor="black"
+              labelTextStyle={{fontWeight: 'bold'}}
+            />
+            <TextField
+              ref={this.zipCodeRef}
+              value={data.zipCode}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitzipCode}
+              returnKeyType='next'
+              label='Zip Code'
+              error={errors.zipCode}
+              fontSize={20}
+              titleFontSize={14}
+              labelFontSize={20}
+              maxLength={20}
+              textColor="black"
+              baseColor="black"
+              labelTextStyle={{fontWeight: 'bold'}}
+            />
+          </View>
+          </ScrollView>
 
       </View> 
       </SafeAreaView>

@@ -6,9 +6,12 @@ export default class KeyCardScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: ["Travis Brooks", "Reagan Dean", "Elon Musk", "Other Guy","Jackie Williams", "Joseph Mulder", "Donald Cross"]
+      users: ["Travis Brooks", "Reagan Dean", "Elon Musk", "Other Guy","Jackie Williams", "Joseph Mulder", "Donald Cross"],
+      passDownInfo: {}
     }
     this.changeArrow = this.changeArrow.bind(this);
+    this.passDownInfo = this.passDownInfo.bind(this);
+    this.nextScreen = this.nextScreen.bind(this);
   }
 
   changeArrow() {
@@ -24,6 +27,21 @@ export default class KeyCardScreen extends Component {
     this.setState({
       showUser: newVar
     });
+  }
+
+  passDownInfo(info) {
+    this.setState({
+      passDownInfo: info
+    });
+    console.log(this.state.passDownInfo, 'passdowninfo log');
+  }
+
+  nextScreen() {
+    if (Object.keys(this.state.passDownInfo).length === 0) {
+          // Make an error message saying you must select someone and give them a fob or card
+    } else {
+      this.props.navigation.navigate("Step2", {params: this.state.passDownInfo});  
+    }
   }
 
   render() {
@@ -44,7 +62,7 @@ export default class KeyCardScreen extends Component {
             <View style={styles.center}>
               <Text style={styles.headerText}>Order Key Cards/FOBs</Text>
             </View>
-            <TouchableOpacity style={{width: 50, padding: 5, marginRight: 10}} onPress={() => this.props.navigation.navigate("Step2")}>
+            <TouchableOpacity style={{width: 50, padding: 5, marginRight: 10}} onPress={() => this.nextScreen()}>
               <Text style={{color: 'white', fontSize: 18}}>Next</Text>
             </TouchableOpacity>
           </View>
@@ -77,7 +95,7 @@ export default class KeyCardScreen extends Component {
           <View style={{paddingHorizontal: 50, width: '100%', paddingTop: 20, flex: 1}}>
             <ScrollView style={{flex: 1}}>
               {this.state.users.map((user, index) => (
-                  <ArrowSwitch user={user} key={index}/>
+                  <ArrowSwitch user={user} key={index} passDownInfo={this.passDownInfo}/>
               ))} 
             </ScrollView>
           </View>

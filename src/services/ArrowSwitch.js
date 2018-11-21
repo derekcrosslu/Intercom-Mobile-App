@@ -37,6 +37,8 @@ export default class ArrowSwitch extends Component {
       this.setState({
           packageRoom: opp3
       });
+    //   this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })
+
   }
 
   changeFront() {
@@ -44,6 +46,8 @@ export default class ArrowSwitch extends Component {
       this.setState({
           frontDoor: opp4
       });
+    //   this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })
+
   }
 
   changeCheckBox() {
@@ -51,14 +55,17 @@ export default class ArrowSwitch extends Component {
       this.setState({
           card: opp,
           fob: false
-      });
+      }, () => this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user }) );
+    //   this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })
   }
   changeSecondBox() {
     let opp2 = !this.state.fob;
     this.setState({
         card: false,
         fob: opp2
-    }); 
+    }, () => this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })); 
+    // this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })
+
   }
   render() {
     let showUser;
