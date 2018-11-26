@@ -40,6 +40,8 @@ export default class KeyCard3Screen extends Component {
     this.onSubmitCity = this.onSubmitCity.bind(this);
     this.onSubmitStateLive = this.onSubmitStateLive.bind(this);
     this.onSubmitzipCode = this.onSubmitzipCode.bind(this);
+    this.selectMonth = this.selectMonth.bind(this);
+    this.selectYear = this.selectYear.bind(this);
 
     this.state = {
       card: "New",
@@ -76,6 +78,23 @@ export default class KeyCard3Screen extends Component {
       yearArr: arr
     });
     console.log(this.props.navigation.state.params, 'key card 3 screen logs');
+  }
+
+  selectMonth(itemValue, itemIndex) {
+    let monthNum;
+    // onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue, monthIndex: itemIndex})}>
+    if (itemIndex < 9) {
+      monthNum = '0' + (itemIndex + 1); 
+    } else {
+      monthNum = '' + (itemIndex + 1);
+    }
+    this.setState({month: itemValue, monthIndex: monthNum});
+  }
+
+  selectYear(itemValue, itemIndex) {
+    // onValueChange={(itemValue, itemIndex) => this.setState({currentYear: itemValue})}>
+    let yearNum = itemValue.slice(2);
+    this.setState({currentYear: yearNum});
   }
 
   ShipFedex() {
@@ -188,6 +207,9 @@ export default class KeyCard3Screen extends Component {
             errors[name] = 'Too short';
           }
         }
+        if (this.state.shippingOption === false) {
+          errors["shippingOptions"] = "Select Shipping Method!";
+        }
       });
 
     this.setState({ errors });
@@ -197,7 +219,9 @@ export default class KeyCard3Screen extends Component {
       console.log(submitToServer, 'sends to server!');
       // alert("Person added!");
       Alert.alert('Person added!');
-      this.props.navigation.goBack();
+      // this.props.navigation.goBack();
+
+      this.props.navigation.navigate("Step4", {step12: this.props.navigation.state.params.params, step3: {nameoncard: this.state.name, cardNum: this.state.cardNumber, cvv: this.state.cvv, first: this.state.first, last: this.state.last, address: this.state.address, city: this.state.city, stateLive: this.state.stateLive, zipCode: this.state.zipCode, shippingOption: this.state.shippingOption, cardExperation: (this.state.monthIndex + this.state.currentYear) }});
     }
   }
 
@@ -334,7 +358,7 @@ export default class KeyCard3Screen extends Component {
             <View style={styles.center}>
               <Text style={styles.headerText}>Order Key Cards/FOBs</Text>
             </View>
-            <TouchableOpacity style={{width: 50, padding: 5, marginRight: 10}} onPress={() => this.props.navigation.navigate("Step4")}>
+            <TouchableOpacity style={{width: 50, padding: 5, marginRight: 10}} onPress={() => this.onSubmit()}>
               <Text style={{color: 'white', fontSize: 18}}>Next</Text>
             </TouchableOpacity>
           </View>
@@ -439,7 +463,7 @@ export default class KeyCard3Screen extends Component {
                 mode="dropdown"
                 selectedValue={this.state.month}
                 style={{ height: 60, width: '50%'}}
-                onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue})}>
+                onValueChange={(itemValue, itemIndex) => this.selectMonth( itemValue, itemIndex )}>
                 <Picker.Item label="Select Month" value="Select Month" />
                 <Picker.Item label="January" value="January" />
                 <Picker.Item label="February" value="February" />
@@ -459,7 +483,7 @@ export default class KeyCard3Screen extends Component {
                 mode="dropdown"
                 selectedValue={this.state.currentYear}
                 style={{ height: 60, width: '50%'}}
-                onValueChange={(itemValue, itemIndex) => this.setState({currentYear: itemValue})}>
+                onValueChange={(itemValue, itemIndex) => this.selectYear(itemValue, itemIndex)}>
                   <Picker.Item label="Select Year" value="Select Year"/>
                 {this.state.yearArr.map((year, index) => (
                   <Picker.Item label={year} value={year} key={index} />
@@ -496,6 +520,7 @@ export default class KeyCard3Screen extends Component {
 
           
           <View style={{width: '80%', paddingLeft: '10%'}}>
+            <View><Text>Billing Address</Text></View>
             <TextField
               ref={this.firstRef}
               value={data.first}
