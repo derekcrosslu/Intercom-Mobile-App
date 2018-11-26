@@ -37,7 +37,7 @@ export default class KeyCard3Screen extends Component {
     this.onSubmitFirst = this.onSubmitFirst.bind(this);
     this.onSubmitLast = this.onSubmitLast.bind(this);
     this.onSubmitAddress = this.onSubmitAddress.bind(this);
-    this.onSubmitCity = this.onSubmitAddress.bind(this);
+    this.onSubmitCity = this.onSubmitCity.bind(this);
     this.onSubmitStateLive = this.onSubmitStateLive.bind(this);
     this.onSubmitzipCode = this.onSubmitzipCode.bind(this);
 
@@ -510,7 +510,7 @@ export default class KeyCard3Screen extends Component {
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
-              maxLength={20}
+              maxLength={25}
               textColor="black"
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
@@ -529,7 +529,7 @@ export default class KeyCard3Screen extends Component {
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
-              maxLength={20}
+              maxLength={25}
               textColor="black"
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
@@ -548,7 +548,7 @@ export default class KeyCard3Screen extends Component {
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
-              maxLength={20}
+              maxLength={25}
               textColor="black"
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
@@ -567,7 +567,7 @@ export default class KeyCard3Screen extends Component {
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
-              maxLength={5}
+              maxLength={25}
               textColor="black"
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
@@ -586,7 +586,7 @@ export default class KeyCard3Screen extends Component {
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
-              maxLength={20}
+              maxLength={25}
               textColor="black"
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
@@ -605,7 +605,7 @@ export default class KeyCard3Screen extends Component {
               fontSize={20}
               titleFontSize={14}
               labelFontSize={20}
-              maxLength={20}
+              maxLength={25}
               textColor="black"
               baseColor="black"
               labelTextStyle={{fontWeight: 'bold'}}
