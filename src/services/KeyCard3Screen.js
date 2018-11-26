@@ -59,7 +59,8 @@ export default class KeyCard3Screen extends Component {
       address: "",
       city: "",
       stateLive: "",
-      zipCode: ""
+      zipCode: "",
+      errors: {}
     }
   }
 
@@ -94,7 +95,7 @@ export default class KeyCard3Screen extends Component {
   selectYear(itemValue, itemIndex) {
     // onValueChange={(itemValue, itemIndex) => this.setState({currentYear: itemValue})}>
     let yearNum = itemValue.slice(2);
-    this.setState({currentYear: yearNum});
+    this.setState({currentYear: itemValue, theYear: yearNum});
   }
 
   ShipFedex() {
@@ -208,7 +209,13 @@ export default class KeyCard3Screen extends Component {
           }
         }
         if (this.state.shippingOption === false) {
-          errors["shippingOptions"] = "Select Shipping Method!";
+          errors["shippingOption"] = "Select Shipping Method!";
+        }
+        if (!this.state.theYear) {
+          errors["expirationMonth"] = "Select Credit Cards expiration date!";
+        }
+        if (!this.state.monthIndex) {
+          errors["expirationMonth"] = "Select Credit Cards expiration date!";
         }
       });
 
@@ -218,10 +225,10 @@ export default class KeyCard3Screen extends Component {
     } else {
       console.log(submitToServer, 'sends to server!');
       // alert("Person added!");
-      Alert.alert('Person added!');
+      // Alert.alert('Person added!');
       // this.props.navigation.goBack();
 
-      this.props.navigation.navigate("Step4", {step12: this.props.navigation.state.params.params, step3: {nameoncard: this.state.name, cardNum: this.state.cardNumber, cvv: this.state.cvv, first: this.state.first, last: this.state.last, address: this.state.address, city: this.state.city, stateLive: this.state.stateLive, zipCode: this.state.zipCode, shippingOption: this.state.shippingOption, cardExperation: (this.state.monthIndex + this.state.currentYear) }});
+      this.props.navigation.navigate("Step4", {step12: this.props.navigation.state.params, step3: {nameoncard: this.state.name, cardNum: this.state.cardNumber, cvv: this.state.cvv, first: this.state.first, last: this.state.last, address: this.state.address, city: this.state.city, stateLive: this.state.stateLive, zipCode: this.state.zipCode, shippingOption: this.state.shippingOption, cardExperation: (this.state.monthIndex + this.state.theYear) }});
     }
   }
 
@@ -457,7 +464,9 @@ export default class KeyCard3Screen extends Component {
                 labelTextStyle={{fontWeight: 'bold'}}
               />
             </View>
-
+            {(this.state.errors.expirationMonth === "Select Credit Cards expiration date!" || this.state.errors.expirationMonth === "Select Credit Cards expiration date!") 
+              ? <View style={{paddingLeft: 20}}><Text style={{fontSize: 18, color: 'red', fontWeight: 'bold'}}>{this.state.errors.expirationMonth}</Text></View>
+              : <View></View>}
             <View style={{flexDirection: 'row', width: '80%', paddingLeft: '10%'}}>
               <Picker
                 mode="dropdown"
@@ -498,7 +507,10 @@ export default class KeyCard3Screen extends Component {
 
             <View>
               <View style={{paddingLeft: 30}}>
-                <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>Select Shipping</Text>
+                  {this.state.errors.shippingOption ?  
+                    <Text style={{fontSize: 20, color: 'red', fontWeight: 'bold'}}>{this.state.errors.shippingOption}</Text>
+                  : <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>Select Shipping</Text>}
+                {/* <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>Select Shipping</Text> */}
               </View>
               <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom: 3, marginTop: 3}}onPress={this.ShipFedex}>
                     {fedex}

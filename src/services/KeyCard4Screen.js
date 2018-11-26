@@ -6,6 +6,10 @@ export default class KeyCard4Screen extends Component {
     super(props);
 
   }
+
+  componentWillMount() {
+    console.log('hello screen4 ' , this.props.navigation.state.params);
+  }
   render() {
 
     return (
