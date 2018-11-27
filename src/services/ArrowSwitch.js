@@ -36,7 +36,7 @@ export default class ArrowSwitch extends Component {
       let opp3 = !this.state.packageRoom;
       this.setState({
           packageRoom: opp3
-      });
+      },  () => this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user }) );
     //   this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })
 
   }
@@ -45,7 +45,7 @@ export default class ArrowSwitch extends Component {
       let opp4 = !this.state.frontDoor;
       this.setState({
           frontDoor: opp4
-      });
+      },  () => this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user }) );
     //   this.props.passDownInfo({card: this.state.card, fob: this.state.fob, packageRoom: this.state.packageRoom, frontDoor: this.state.frontDoor, user: this.props.user })
 
   }

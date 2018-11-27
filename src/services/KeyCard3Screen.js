@@ -380,14 +380,14 @@ export default class KeyCard3Screen extends Component {
 
           
           <ScrollView>
-            <Picker
+            {/* <Picker
               mode="dropdown"
               selectedValue={this.state.card}
               style={{ height: 60, width: '80%', marginLeft: '10%'}}
               onValueChange={(itemValue, itemIndex) => this.setState({card: itemValue})}>
               <Picker.Item label="New Card" value="New" />
               <Picker.Item label="Existing Card" value="Existing" />
-            </Picker>
+            </Picker> */}
 
             <Picker
               mode="dropdown"
@@ -500,10 +500,10 @@ export default class KeyCard3Screen extends Component {
               </Picker>
             </View>
             
-            <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom: 15}}>
+            {/* <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom: 15}}>
                   {saveCard}
                   <Text style={{color: 'black', fontSize: 16}}>Save Credit Card</Text>
-            </View>
+            </View> */}
 
             <View>
               <View style={{paddingLeft: 30}}>
@@ -530,9 +530,9 @@ export default class KeyCard3Screen extends Component {
               </TouchableOpacity>
             </View>
 
-          
+                      <View style={{paddingTop: 10, paddingLeft: 15}}><Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>Billing Address</Text></View>
           <View style={{width: '80%', paddingLeft: '10%'}}>
-            <View><Text>Billing Address</Text></View>
+            {/* <View style={{paddingTop: 10}}><Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>Billing Address</Text></View> */}
             <TextField
               ref={this.firstRef}
               value={data.first}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 
 export default class KeyCard4Screen extends Component {
   constructor(props) {
@@ -11,7 +11,17 @@ export default class KeyCard4Screen extends Component {
     console.log('hello screen4 ' , this.props.navigation.state.params);
   }
   render() {
+    let shipCost;
 
+    if (this.props.navigation.state.params.step3.shippingOption === 'FedEX') {
+      shipCost = 12;
+    } else if (this.props.navigation.state.params.step3.shippingOption === 'overnight') {
+      shipCost = 30;
+    } else if (this.props.navigation.state.params.step3.shippingOption === 'usps') {
+      shipCost = 6;
+    } else if (this.props.navigation.state.params.step3.shippingOption === 'pickup') {
+      shipCost = 0;
+    }
     return (
       <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -36,61 +46,82 @@ export default class KeyCard4Screen extends Component {
             <Image source={require('../../img/step_four.png')} resizeMode="contain" style={{width: '100%'}}/>
           </View>
 
-          <View>
-            <Text>Order Summary</Text>
+        <ScrollView>
+          <View style={{width: '90%', marginLeft: '5%', padding: 5}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>Order Summary</Text>
           </View>
 
-          <View>
-            <Text>for: </Text>
-            <Text>Allow Package Room Access</Text>
-            <Text>Allow Front Door Access</Text>
-          </View>
-          <View>
-            <Text>Ships to</Text>
-          </View>
-
-          <View>
-            <Text>Bills to</Text>
+          <View style={{width: '90%', marginLeft: '5%', backgroundColor: 'lightgrey', padding: 5}}>
+            <View style={{paddingLeft: 10}}>
+              <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>{this.props.navigation.state.params.step12.step1.card ? <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>Key Card</Text>: <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>Key Fob</Text>} for:  {this.props.navigation.state.params.step12.step1.user} </Text>
+            </View>
+            <View style={{paddingLeft: 20}}>
+              {this.props.navigation.state.params.step12.step1.packageRoom ? <Text></Text>: <View style={{padding:3, paddingLeft: 0, flexDirection: 'row', alignItems: 'center'}}><Image source={require('../../img/checkmark.png')} style={{width: 16, height: 16, marginRight: 5}}/><Text style={{fontSize: 16, color: 'black'}}>Allows Package Room Access</Text></View>}  
+              {this.props.navigation.state.params.step12.step1.frontDoor ? <Text></Text> : <View style={{padding:3, paddingLeft: 0, flexDirection: 'row', alignItems: 'center'}}><Image source={require('../../img/checkmark.png')} style={{width: 16, height: 16,marginRight: 5}}/><Text style={{fontSize: 16, color: 'black'}}>Allows Front Door Access</Text></View>}
+            </View>
           </View>
 
-          <View>
-            <View>
-              <View>
-                <Text>Items: 1</Text>
+          <View style={{width: '90%', marginLeft: '5%', padding: 5}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>Ships to</Text>
+          </View>
+          <View style={{width: '90%', marginLeft: '5%', backgroundColor: 'lightgrey', padding: 5}}>
+            <Text style={{fontSize: 16, color: 'black'}}>{this.props.navigation.state.params.step12.step2.shipName}</Text>
+            <Text style={{fontSize: 16, color: 'black'}}>{this.props.navigation.state.params.step12.step2.shipAddress1}, {this.props.navigation.state.params.step12.step2.shipAddress2}</Text>
+            <Text style={{fontSize: 16, color: 'black'}}>{this.props.navigation.state.params.step12.step2.shipCity}, {this.props.navigation.state.params.step12.step2.shipState} {this.props.navigation.state.params.step12.step2.shipZipCode}</Text>
+          </View>
+
+
+          <View style={{width: '90%', marginLeft: '5%', padding: 5}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>Bills to</Text>
+          </View>
+          <View style={{width: '90%', marginLeft: '5%', backgroundColor: 'lightgrey', padding: 5}}>
+            <Text style={{fontSize: 16, color: 'black'}}>{this.props.navigation.state.params.step3.first} {this.props.navigation.state.params.step3.last}</Text>
+            <Text style={{fontSize: 16, color: 'black'}}>{this.props.navigation.state.params.step3.address},</Text>
+            <Text style={{fontSize: 16, color: 'black'}}>{this.props.navigation.state.params.step3.city}, {this.props.navigation.state.params.step3.stateLive} {this.props.navigation.state.params.step3.zipCode}</Text>
+          </View>
+
+          <View style={{width: '90%', marginLeft: '5%'}}>
+            <View style={{flexDirection: 'row', paddingVertical: 5}}>
+              <View style={{justifyContent:'center'}}>
+                <Text style={{fontSize: 18, color: 'black'}}>Items:</Text>
               </View>
-              <View>
-                <Text>$50</Text>
+              <View style={{flex: 1}}></View>
+              <View style={{justifyContent:'center'}}> 
+                <Text style={{fontSize: 18, color: 'black'}}>$50</Text>
               </View>
             </View>
 
-            <View>
-              <View>
-                <Text>Shipping:</Text>
+            <View style={{flexDirection: 'row', paddingVertical: 5}}>
+              <View style={{justifyContent:'center'}}>
+                <Text style={{fontSize: 18, color: 'black'}}>Shipping: {this.props.navigation.state.params.step3.shippingOption}</Text>
               </View>
-              <View>
-                <Text>$12</Text>
+              <View style={{flex: 1}}></View>
+              <View style={{justifyContent:'center'}}> 
+                <Text style={{fontSize: 18, color: 'black'}}>${shipCost}</Text>
               </View>
-            </View>
+            </View>         
 
-          <View>
-              <View>
-                <Text>Tax:</Text>
+            <View style={{flexDirection: 'row', paddingVertical: 5}}>
+              <View style={{justifyContent:'center'}}>
+                <Text style={{fontSize: 18, color: 'black'}}>Tax:</Text>
               </View>
-              <View>
-                <Text>$0.1775</Text>
+              <View style={{flex: 1}}></View>
+              <View style={{justifyContent:'center'}}> 
+                <Text style={{fontSize: 18, color: 'black'}}>$0.1775</Text>
               </View>
-            </View>
+            </View> 
 
-
-          <View>
-              <View>
-                <Text>Total:</Text>
+            <View style={{flexDirection: 'row', paddingVertical: 5}}>
+              <View style={{justifyContent:'center'}}>
+                <Text style={{fontSize: 18, color: 'black'}}>Total:</Text>
               </View>
-              <View>
-                <Text></Text>
+              <View style={{flex: 1}}></View>
+              <View style={{justifyContent:'center'}}> 
+                <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>$ {50 + shipCost + 0.1775}</Text>
               </View>
-            </View>
+            </View> 
           </View>
+          </ScrollView>
       </View> 
       </SafeAreaView>
     );
