@@ -36,6 +36,61 @@ export default class KeyCard4Screen extends Component {
             <Image source={require('../../img/step_four.png')} resizeMode="contain" style={{width: '100%'}}/>
           </View>
 
+          <View>
+            <Text>Order Summary</Text>
+          </View>
+
+          <View>
+            <Text>for: </Text>
+            <Text>Allow Package Room Access</Text>
+            <Text>Allow Front Door Access</Text>
+          </View>
+          <View>
+            <Text>Ships to</Text>
+          </View>
+
+          <View>
+            <Text>Bills to</Text>
+          </View>
+
+          <View>
+            <View>
+              <View>
+                <Text>Items: 1</Text>
+              </View>
+              <View>
+                <Text>$50</Text>
+              </View>
+            </View>
+
+            <View>
+              <View>
+                <Text>Shipping:</Text>
+              </View>
+              <View>
+                <Text>$12</Text>
+              </View>
+            </View>
+
+          <View>
+              <View>
+                <Text>Tax:</Text>
+              </View>
+              <View>
+                <Text>$0.1775</Text>
+              </View>
+            </View>
+
+
+          <View>
+              <View>
+                <Text>Total:</Text>
+              </View>
+              <View>
+                <Text></Text>
+              </View>
+            </View>
+          </View>
       </View> 
       </SafeAreaView>
     );
