@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import ArrowSwitch from './ArrowSwitch';
+import Axios from 'axios';
 
 export default class KeyCardScreen extends Component {
   constructor(props) {
@@ -28,6 +29,15 @@ export default class KeyCardScreen extends Component {
       showUser: newVar
     });
   }
+
+  // componentWillMount() {
+  //   Axios.post('http://68.183.98.212:3000/chargecreditcard', {name: 'Joe', cc: '1234'})
+  //     .then((res) => {
+  //       console.log(res.data, 'cc response');
+  //     }).catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   passDownInfo(info) {
     this.setState({

@@ -60,7 +60,8 @@ export default class KeyCard3Screen extends Component {
       city: "",
       stateLive: "",
       zipCode: "",
-      errors: {}
+      errors: {},
+      listOfStates: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
     }
   }
 
@@ -85,9 +86,9 @@ export default class KeyCard3Screen extends Component {
     let monthNum;
     // onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue, monthIndex: itemIndex})}>
     if (itemIndex < 9) {
-      monthNum = '0' + (itemIndex + 1); 
+      monthNum = '0' + (itemIndex ); 
     } else {
-      monthNum = '' + (itemIndex + 1);
+      monthNum = '' + (itemIndex );
     }
     this.setState({month: itemValue, monthIndex: monthNum});
   }

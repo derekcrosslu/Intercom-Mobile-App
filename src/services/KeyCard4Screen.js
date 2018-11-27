@@ -1,15 +1,85 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import Axios from 'axios';
+
 
 export default class KeyCard4Screen extends Component {
   constructor(props) {
     super(props);
 
+    this.processOrder = this.processOrder.bind(this);
   }
 
-  componentWillMount() {
+  processOrder() {
+    let shippingCost;
+    let tax = 0.17;
+    let product;
+    let accessKey = '';
+    if (this.props.navigation.state.params.step3.shippingOption === 'FedEX') {
+      shippingCost = 12;
+    } else if (this.props.navigation.state.params.step3.shippingOption === 'overnight') {
+      shippingCost = 30;
+    } else if (this.props.navigation.state.params.step3.shippingOption === 'usps') {
+      shippingCost = 6;
+    } else if (this.props.navigation.state.params.step3.shippingOption === 'pickup') {
+      shippingCost = 0;
+    }
+    let total = '' + (tax + shippingCost + 50);
+    if (this.props.navigation.state.params.step12.step1.card === true) {
+      product = "Key Card";
+    } else {
+      product = 'Key Fob';
+    }
+    if (this.props.navigation.state.params.step12.step1.packageRoom === false) {
+      accessKey += 'Accesss to package room';
+    }
+    if (this.props.navigation.state.params.step12.step1.frontDoor === false) {
+      accessKey += 'Accesss to front door';
+    }
+
     console.log('hello screen4 ' , this.props.navigation.state.params);
+      Axios.post('http://68.183.98.212:3000/chargecreditcard', {nameoncard: this.props.navigation.state.params.step3.nameoncard, cardNum: this.props.navigation.state.params.step3.cardNum, 
+      cvv: this.props.navigation.state.params.step3.cvv, cardExperation: this.props.navigation.state.params.step3.cardExperation, shippingCost: ('' + shippingCost), taxes: ('' + 0.17), total:total, 
+      billFirst: this.props.navigation.state.params.step3.first, billLast:this.props.navigation.state.params.step3.last, billAddress: this.props.navigation.state.params.step3.address, billCity: this.props.navigation.state.params.step3.city, billState: this.props.navigation.state.params.step3.stateLive, billzipCode: this.props.navigation.state.params.step3.zipCode,
+      shipFirst: this.props.navigation.state.params.step12.step2.shipName.split(" ")[0], shipLast: this.props.navigation.state.params.step12.step2.shipName.split(" ")[1], shipAddress: (this.props.navigation.state.params.step12.step2.shipAddress1 + ' ' + this.props.navigation.state.params.step12.step2.shipAddress2), shipCity: this.props.navigation.state.params.step12.step2.shipCity, shipState: this.props.navigation.state.params.step12.step2.shipState, shipZipCode: this.props.navigation.state.params.step12.step2.shipZipCode, product: product, accessKey: accessKey, forUser: this.props.navigation.state.params.step12.step1.user })
+        .then((res) => {
+          if (res.data === 'success') {
+            console.log(res.data, 'cc response');
+            Alert.alert('Payment Processed!');
+            this.props.navigation.navigate("Home");
+          } else {
+            console.log(res.data, 'cc failed response');
+            Alert.alert('This transaction has been declined.');
+          }
+        }).catch((err) => {
+          console.log(err);
+        });
+
+        // var nameoncard = req.body.nameoncard;
+        // var cardNum = req.body.cardNum;
+        // var cvv = req.body.cvv;
+        // var cardExperation = req.body.cardExperation;
+        // var shippingCost = req.body.shippingCost;
+        // var tax = req.body.tax;
+        // var total = req.body.total;
+        // var billFirst = req.body.billFirst;
+        // var billLast = req.body.billLast;
+        // var billAddress = req.body.billAddress;
+        // var billCity = req.body.billCity;
+        // var billState = req.body.billState;
+        // var billzipCode = req.body.billzipCode;
+        // var shipFirst = req.body.shipFirst;
+        // var shipLast = req.body.shipLast;
+        // var shipAddress = req.body.shipAddress;
+        // var shipCity = req.body.shipCity;
+        // var shipState = req.body.shipState;
+        // var shipZipCode = req.body.shipZipCode;
+        // var product = req.body.product;
+        // var accessKey = req.body.accessKey;
+        // var forUser = req.body.forUser;
+        // nameoncard, cardNum, cvv, cardExperation, shippingCost, tax, total, billFirst, billLast, billAddress, billCity, billState, billzipCode, shipFirst, shipLast, shipAddress, shipCity, shipState, shipZipCode, product, accessKey, forUser
   }
+
   render() {
     let shipCost;
 
@@ -33,7 +103,7 @@ export default class KeyCard4Screen extends Component {
             <View style={styles.center}>
               <Text style={styles.headerText}>Order Key Cards/FOBs</Text>
             </View>
-            <TouchableOpacity style={{width: 60, padding: 5, marginRight: 0}}>
+            <TouchableOpacity style={{width: 60, padding: 5, marginRight: 0}} onPress={() => this.processOrder()}>
               <Text style={{color: 'white', fontSize: 18}}>Order</Text>
             </TouchableOpacity>
           </View>
