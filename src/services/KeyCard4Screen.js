@@ -38,7 +38,7 @@ export default class KeyCard4Screen extends Component {
     }
 
     console.log('hello screen4 ' , this.props.navigation.state.params);
-      Axios.post('http://68.183.98.212:3000/chargecreditcard', {nameoncard: this.props.navigation.state.params.step3.nameoncard, cardNum: this.props.navigation.state.params.step3.cardNum, 
+      Axios.post('http://198.199.66.113:3000/chargecreditcard', {nameoncard: this.props.navigation.state.params.step3.nameoncard, cardNum: this.props.navigation.state.params.step3.cardNum, 
       cvv: this.props.navigation.state.params.step3.cvv, cardExperation: this.props.navigation.state.params.step3.cardExperation, shippingCost: ('' + shippingCost), taxes: ('' + 0.17), total:total, 
       billFirst: this.props.navigation.state.params.step3.first, billLast:this.props.navigation.state.params.step3.last, billAddress: this.props.navigation.state.params.step3.address, billCity: this.props.navigation.state.params.step3.city, billState: this.props.navigation.state.params.step3.stateLive, billzipCode: this.props.navigation.state.params.step3.zipCode,
       shipFirst: this.props.navigation.state.params.step12.step2.shipName.split(" ")[0], shipLast: this.props.navigation.state.params.step12.step2.shipName.split(" ")[1], shipAddress: (this.props.navigation.state.params.step12.step2.shipAddress1 + ' ' + this.props.navigation.state.params.step12.step2.shipAddress2), shipCity: this.props.navigation.state.params.step12.step2.shipCity, shipState: this.props.navigation.state.params.step12.step2.shipState, shipZipCode: this.props.navigation.state.params.step12.step2.shipZipCode, product: product, accessKey: accessKey, forUser: this.props.navigation.state.params.step12.step1.user })

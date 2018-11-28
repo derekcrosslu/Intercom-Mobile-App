@@ -32,12 +32,12 @@ export default class App extends Component {
     this._rememberData(opp);
   }
 
-  logIn() {
+  logIn(data) {
     this.setState({
       loggedIn: true
     });
 
-    let Persist = {username: 'jmulder', PersistingLogin: true};
+    let Persist = {username: 'jmulder', PersistingLogin: true, data: data};
     _storeData = async () => {
       try {
         await AsyncStorage.setItem('Persist', JSON.stringify(Persist));

@@ -101,7 +101,7 @@ export default class Login extends Component {
           errors["username"] = "Can't leave empty";
           this.setState({ errors });   
         } else {
-          axios.post(`http://68.183.98.212:3000/api/${username}/${password}/${wifiMac}`)
+          axios.post(`http://198.199.66.113:3000/api/${username}/${password}/${wifiMac}`)
             .then((res) => {
               // console.log(res.data, "server response");
               if (res.data === 'invalid username ' ) {
@@ -111,12 +111,12 @@ export default class Login extends Component {
               } else if (res.data === 'wifimacaddress not registered') {
                 errors["wifiMac"] = 'Wifimacaddress not registered';
               }
-
+                console.log(res.data, 'console.log of server response from data');
               this.setState({ errors });
               if (Object.keys(errors).length > 0) {
                 console.log(Object.keys(errors).length, 'errors ocurred try again.');
               } else {
-                this.props.login();
+                this.props.login(res.data);
               }
 
             })

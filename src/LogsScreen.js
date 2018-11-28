@@ -20,10 +20,45 @@ export default class LogsScreen extends Component {
 
   componentWillMount() {
     this.logData();
+    this._retrieveRememberData();
+  }
+
+  // _retrieveUserData = async () => {
+  //   try {
+  //     const userData = await AsyncStorage.getItem('Persist');
+  //     if (userData !== null) {
+
+  //       this.setState({
+  //         userData: JSON.parse(userData)
+  //       });
+  //       console.log(userData, "THE USERSDATA!!!");
+  //     } else {
+  //       console.log('Nothing was found');
+  //     }
+  //   } catch (error) {
+  //     console.log("User data error", error);
+  //   }
+  // }
+
+  _retrieveRememberData = async () => {
+    try {
+      const rememberValue = await AsyncStorage.getItem('Persist');
+      if (rememberValue !== null) {
+
+        this.setState({
+          rememberMe: JSON.parse(rememberValue)
+        });
+        console.log(rememberValue, "value");
+      } else {
+        console.log('Nothing was found');
+      }
+    } catch (error) {
+      console.log("retrieveRemeberData", error);
+    }
   }
 
   logData() {
-    axios.get('http://68.183.98.212:3000/api/logs')
+    axios.get('http://198.199.66.113:3000/api/logs')
       .then((res) => {
         console.log('log data', res.data);
         this.setState({
