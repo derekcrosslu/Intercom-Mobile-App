@@ -101,7 +101,7 @@ export default class Login extends Component {
           errors["username"] = "Can't leave empty";
           this.setState({ errors });   
         } else {
-          axios.post(`http://198.199.66.113:3000/api/${username}/${password}/${wifiMac}`)
+          axios.post(`http://104.248.62.198:3000/api/${username}/${password}/${wifiMac}`)
             .then((res) => {
               // console.log(res.data, "server response");
               if (res.data === 'invalid username ' ) {

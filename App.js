@@ -37,7 +37,7 @@ export default class App extends Component {
       loggedIn: true
     });
 
-    let Persist = {username: 'jmulder', PersistingLogin: true, data: data};
+    let Persist = {username: 'jmulder', PersistingLogin: true, userData: data};
     _storeData = async () => {
       try {
         await AsyncStorage.setItem('Persist', JSON.stringify(Persist));
@@ -69,7 +69,7 @@ export default class App extends Component {
         });
         console.log(rememberValue, "value");
       } else {
-        console.log('Nothing was found');
+        console.log('Nothing was found', rememberValue);
       }
     } catch (error) {
       console.log("retrieveRemeberData", error);

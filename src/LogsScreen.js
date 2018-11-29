@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView, AsyncStorage} from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import CustomFilter from './CustomFilter';
 import OpacityBackGround from './OpacityBackGround';
@@ -16,49 +16,55 @@ export default class LogsScreen extends Component {
     }
     this.filterOn = this.filterOn.bind(this);
     this.logData = this.logData.bind(this);
+    this._retrieveData = this._retrieveData.bind(this);
   }
 
   componentWillMount() {
-    this.logData();
-    this._retrieveRememberData();
+    // this.logData();
+    this._retrieveData();
   }
 
-  // _retrieveUserData = async () => {
-  //   try {
-  //     const userData = await AsyncStorage.getItem('Persist');
-  //     if (userData !== null) {
 
-  //       this.setState({
-  //         userData: JSON.parse(userData)
-  //       });
-  //       console.log(userData, "THE USERSDATA!!!");
-  //     } else {
-  //       console.log('Nothing was found');
-  //     }
-  //   } catch (error) {
-  //     console.log("User data error", error);
-  //   }
-  // }
-
-  _retrieveRememberData = async () => {
+  _retrieveData = async () => {
     try {
-      const rememberValue = await AsyncStorage.getItem('Persist');
-      if (rememberValue !== null) {
+      const value = await AsyncStorage.getItem('Persist');
+      if (value !== null) {
+        let isTrue = JSON.parse(value);
+        if (isTrue) {
+          console.log('values for user', isTrue.userData[0].ID);
+          axios.get('http://104.248.62.198:3000/getbuildinginfo', {params: {id: isTrue.userData[0].ID}})
+            .then((res) => {
+              var buildingID = res.data[0].BUILDING_ID;
+              var apartmentID = res.data[0].APARTMENT_ID;
+              console.log(res.data, apartmentID,buildingID, 'building info response');
 
-        this.setState({
-          rememberMe: JSON.parse(rememberValue)
-        });
-        console.log(rememberValue, "value");
+              axios.get('http://104.248.62.198:3000/buildinginfo', {params: {id: buildingID}})
+                .then((res) => {
+                  console.log('hello',res.data, 'hello');
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          console.log('was not true', value);
+ 
+        } 
       } else {
-        console.log('Nothing was found');
+
+        console.log('The key you searched for doesnt exist');
       }
-    } catch (error) {
-      console.log("retrieveRemeberData", error);
-    }
+     } catch (error) {
+       console.log("there was an error trying to find things in storage or something", error);
+     }
   }
 
   logData() {
-    axios.get('http://198.199.66.113:3000/api/logs')
+    axios.get('http://104.248.62.198:3000/api/logs')
       .then((res) => {
         console.log('log data', res.data);
         this.setState({

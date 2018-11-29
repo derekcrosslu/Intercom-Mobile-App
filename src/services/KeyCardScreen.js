@@ -7,8 +7,7 @@ export default class KeyCardScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: ["Travis Brooks", "Reagan Dean", "Elon Musk", "Other Guy","Jackie Williams", "Joseph Mulder", "Donald Cross"],
-      passDownInfo: {}
+      users: ["Travis Brooks", "Reagan Dean", "Elon Musk", "Other Guy","Jackie Williams", "Joseph Mulder", "Donald Cross"]    
     }
     this.changeArrow = this.changeArrow.bind(this);
     this.passDownInfo = this.passDownInfo.bind(this);
@@ -39,18 +38,104 @@ export default class KeyCardScreen extends Component {
   //     });
   // }
 
-  passDownInfo(info) {
-    this.setState({
-      passDownInfo: info
-    });
-    console.log(this.state.passDownInfo, 'passdowninfo log');
+  passDownInfo(info, index) {
+    if (index === 0) {
+      this.setState({
+        passDownInfo: info
+      }); 
+    } else if (index === 1) {
+      this.setState({
+        passDownInfo2: info
+      });    
+    } else if (index === 2) {
+      this.setState({
+        passDownInfo3: info
+      });      
+    } else if (index === 3) {
+      this.setState({
+        passDownInfo4: info
+      });  
+    } else if (index === 4) {
+      this.setState({
+        passDownInfo5: info
+      });  
+    } else if (index === 5) {
+      this.setState({
+        passDownInfo6: info
+      });  
+    } else if (index === 6) {
+      this.setState({
+        passDownInfo7: info
+      });  
+    } else if (index === 7) {
+      this.setState({
+        passDownInfo8: info
+      });  
+    } else if (index === 8) {
+      this.setState({
+        passDownInfo9: info
+      });  
+    } else if (index === 9) {
+      this.setState({
+        passDownInfo10: info
+      });  
+    } else if (index === 10) {
+      this.setState({
+        passDownInfo11: info
+      });  
+    } else if (index === 11) {
+      this.setState({
+        passDownInfo12: info
+      });  
+    } else if (index === 12) {
+      this.setState({
+        passDownInfo13: info
+      });  
+    } else if (index === 13) {
+      this.setState({
+        passDownInfo14: info
+      });  
+    } else if (index === 14) {
+      this.setState({
+        passDownInfo15: info
+      });  
+    } else if (index === 15) {
+      this.setState({
+        passDownInfo16: info
+      });  
+    } else if (index === 16) {
+      this.setState({
+        passDownInfo17: info
+      });  
+    } else if (index === 17) {
+      this.setState({
+        passDownInfo18: info
+      });  
+    } else if (index === 18) {
+      this.setState({
+        passDownInfo19: info
+      });  
+    } else if (index === 19) {
+      this.setState({
+        passDownInfo20: info
+      });  
+    }
+    
+    console.log(this.state.passDownInfo,this.state.passDownInfo2, 'passdowninfo log');
   }
 
   nextScreen() {
-    if (Object.keys(this.state.passDownInfo).length === 0) {
+    if (Object.keys(this.state).length === 1) {
           // Make an error message saying you must select someone and give them a fob or card
     } else {
-      this.props.navigation.navigate("Step2", {params: this.state.passDownInfo});  
+      var infoObj = {};
+      for (k in this.state) {
+        if (k !== 'users') {
+          infoObj[k] = this.state[k];
+        }
+      }
+      this.props.navigation.navigate("Step2", {params: infoObj});  
+      // this.props.navigation.navigate("Step2", {params: this.state.passDownInfo});  
     }
   }
 
@@ -105,7 +190,7 @@ export default class KeyCardScreen extends Component {
           <View style={{paddingHorizontal: 50, width: '100%', paddingTop: 20, flex: 1}}>
             <ScrollView style={{flex: 1}}>
               {this.state.users.map((user, index) => (
-                  <ArrowSwitch user={user} key={index} passDownInfo={this.passDownInfo}/>
+                  <ArrowSwitch user={user} key={index} keyz={index} passDownInfo={this.passDownInfo}/>
               ))} 
             </ScrollView>
           </View>
