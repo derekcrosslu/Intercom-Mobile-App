@@ -103,7 +103,7 @@ export default class KeyCard4Screen extends Component {
     } else if (this.props.navigation.state.params.step3.shippingOption === 'usps') {
       shipCost = 6;
     } else if (this.props.navigation.state.params.step3.shippingOption === 'pickup') {
-      shipCost = 0;
+      shipCost = 10;
     }
     return (
       <SafeAreaView style={styles.safeArea}>

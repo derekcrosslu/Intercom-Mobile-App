@@ -521,10 +521,10 @@ export default class KeyCard3Screen extends Component {
                     {overnight}
                     <Text style={{color: 'black', fontSize: 16}}>Overnight</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom:3}} onPress={this.ShipUsps}>
+              {/* <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom:3}} onPress={this.ShipUsps}>
                     {usps}
                     <Text style={{color: 'black', fontSize: 16}}>USPS</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginBottom:3}} onPress={this.ShipPickup}>
                     {pickup}
                     <Text style={{color: 'black', fontSize: 16}}>Pickup</Text>
