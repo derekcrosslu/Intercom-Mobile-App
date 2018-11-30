@@ -20,7 +20,7 @@ export default class LogsScreen extends Component {
   }
 
   componentWillMount() {
-    // this.logData();
+    this.logData();
     this._retrieveData();
   }
 
@@ -32,13 +32,13 @@ export default class LogsScreen extends Component {
         let isTrue = JSON.parse(value);
         if (isTrue) {
           console.log('values for user', isTrue.userData[0].ID);
-          axios.get('http://104.248.62.198:3000/getbuildinginfo', {params: {id: isTrue.userData[0].ID}})
+          axios.get('http://104.248.110.70:3000/getbuildinginfo', {params: {id: isTrue.userData[0].ID}})
             .then((res) => {
               var buildingID = res.data[0].BUILDING_ID;
               var apartmentID = res.data[0].APARTMENT_ID;
               console.log(res.data, apartmentID,buildingID, 'building info response');
 
-              axios.get('http://104.248.62.198:3000/buildinginfo', {params: {id: buildingID}})
+              axios.get('http://104.248.110.70:3000/buildinginfo', {params: {id: buildingID}})
                 .then((res) => {
                   console.log('hello',res.data, 'hello');
                 })
@@ -64,7 +64,7 @@ export default class LogsScreen extends Component {
   }
 
   logData() {
-    axios.get('http://104.248.62.198:3000/api/logs')
+    axios.get('http://104.248.110.70:3000/api/logs')
       .then((res) => {
         console.log('log data', res.data);
         this.setState({

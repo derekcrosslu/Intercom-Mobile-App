@@ -9,42 +9,67 @@ export default class MainScreen extends Component {
 
     }
     this.getNvr = this.getNvr.bind(this);
+    this._retrieveData = this._retrieveData.bind(this);
+    this.saveUserInfo = this.saveUserInfo.bind(this);
   }
 
   componentWillMount() {
-    // this.getNvr();
-    // console.log("This thing rang");
-    let loginData = {username: 'jmulder', password: '123456', macwifi: '12:12:12:12'};
+    this._retrieveData();
+    
+  }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('Persist');
+      if (value !== null) {
+        let isTrue = JSON.parse(value);
+        if (isTrue) {
+          console.log('values for user', isTrue.userData[0].ID);
+          axios.get('http://104.248.110.70:3000/getbuildinginfo', {params: {id: isTrue.userData[0].ID}})
+            .then((res) => {
+              var buildingID = res.data[0].BUILDING_ID;
+              var apartmentID = res.data[0].APARTMENT_ID;
+              console.log(res.data, apartmentID,buildingID, 'building info response');
+
+              axios.get('http://104.248.110.70:3000/buildinginfo', {params: {id: buildingID}})
+                .then((response) => {
+                  console.log('hello',response.data, 'hello');
+                  this.saveUserInfo(res.data, response.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          console.log('was not true', value);
+        } 
+      } else {
+
+        console.log('The key you searched for doesnt exist');
+      }
+     } catch (error) {
+       console.log("there was an error trying to find things in storage or something", error);
+     }
+  }
+
+
+  saveUserInfo(data, moreData) {
+    let UserInfo = {accountInfo: data, buildingInfo: moreData};
     _storeData = async () => {
       try {
-        // console.log("hello will");
-        await AsyncStorage.setItem('loginData', JSON.stringify(loginData));
+        await AsyncStorage.setItem('UserInfo', JSON.stringify(UserInfo));
+        console.log("user info was saved!");
       } catch (error) {
-        // Error saving data
-        console.log('There was an error!');
+        console.log('There was an error!', error);
       }
     }
-    // _storeData();
+    _storeData(); 
   }
-  componentDidMount() {
-    _retrieveData = async () => {
-      try {
-        // console.log("hello did");
-        const value = await AsyncStorage.getItem('loginData');
-        if (value !== null) {
-          // We have data!!
-          console.log(JSON.parse(value), 'THIS IS THE VALUE!');
-        } else {
-          console.log('The key you searched for doesnt exist');
-        }
-       } catch (error) {
-         // Error retrieving data
-         console.log("there was an error trying to find things in storage or something");
-       }
-    }
-    // console.log("component did mount");
-    // _retrieveData();
-  }
+
 
   getNvr() {
       axios.get('http://96.239.60.172:9002')
