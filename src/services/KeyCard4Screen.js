@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView, Alert, AsyncStorage } from 'react-native';
 import Axios from 'axios';
 
 
@@ -11,7 +11,39 @@ export default class KeyCard4Screen extends Component {
     }
 
     this.processOrder = this.processOrder.bind(this);
+    this._retrieveData = this._retrieveData.bind(this);
   }
+
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('UserInfo');
+      if (value !== null) {
+        let isTrue = JSON.parse(value);
+        if (isTrue) {
+          console.log('values for user', isTrue);
+        console.log(isTrue)
+          this.setState({
+            buildingInfo: isTrue
+          });
+          // isTrue[0].buildingInfo
+          // isTrue[0].apartmentInfo.NUM
+
+        } else {
+          console.log('was not true', value);
+ 
+        } 
+      } else {
+
+        console.log('The key you searched for doesnt exist');
+      }
+     } catch (error) {
+       console.log("there was an error trying to find things in storage or something", error);
+     }
+  }
+
+
+
 
   processOrder() {
     let shippingCost;
@@ -44,7 +76,8 @@ export default class KeyCard4Screen extends Component {
       Axios.post('http://104.248.110.70:3000/chargecreditcard', {nameoncard: this.props.navigation.state.params.step3.nameoncard, cardNum: this.props.navigation.state.params.step3.cardNum, 
       cvv: this.props.navigation.state.params.step3.cvv, cardExperation: this.props.navigation.state.params.step3.cardExperation, shippingCost: ('' + shippingCost), taxes: ('' + this.state.tax), total:total, 
       billFirst: this.props.navigation.state.params.step3.first, billLast:this.props.navigation.state.params.step3.last, billAddress: this.props.navigation.state.params.step3.address, billCity: this.props.navigation.state.params.step3.city, billState: this.props.navigation.state.params.step3.stateLive, billzipCode: this.props.navigation.state.params.step3.zipCode,
-      shipFirst: this.props.navigation.state.params.step12.step2.shipName.split(" ")[0], shipLast: this.props.navigation.state.params.step12.step2.shipName.split(" ")[1], shipAddress: (this.props.navigation.state.params.step12.step2.shipAddress1 + ' ' + this.props.navigation.state.params.step12.step2.shipAddress2), shipCity: this.props.navigation.state.params.step12.step2.shipCity, shipState: this.props.navigation.state.params.step12.step2.shipState, shipZipCode: this.props.navigation.state.params.step12.step2.shipZipCode, product: this.props.navigation.state.params.step12.step1, cost: this.state.cost })
+      shipFirst: this.props.navigation.state.params.step12.step2.shipName.split(" ")[0], shipLast: this.props.navigation.state.params.step12.step2.shipName.split(" ")[1], shipAddress: (this.props.navigation.state.params.step12.step2.shipAddress1 + ' ' + this.props.navigation.state.params.step12.step2.shipAddress2), shipCity: this.props.navigation.state.params.step12.step2.shipCity, 
+      shipState: this.props.navigation.state.params.step12.step2.shipState, shipZipCode: this.props.navigation.state.params.step12.step2.shipZipCode, product: this.props.navigation.state.params.step12.step1, cost: this.state.cost, buildingInfo: this.state.buildingInfo})
         .then((res) => {
           if (res.data === 'success') {
             console.log(res.data, 'cc response');
@@ -85,6 +118,7 @@ export default class KeyCard4Screen extends Component {
 
   componentWillMount(){
     console.log('hello screen4 ' , this.props.navigation.state.params);
+    this._retrieveData();
     var cost = Object.keys(this.props.navigation.state.params.step12.step1).length * 25;
     var tax = Math.round(cost * 8.875) / 100;
     this.setState({
