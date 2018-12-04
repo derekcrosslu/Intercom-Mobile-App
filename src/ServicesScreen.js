@@ -1,12 +1,42 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView, Linking } from 'react-native';
+import { StyleSheet, Platform, SafeAreaView, Text, View, TouchableOpacity, Image, ScrollView, Linking, AsyncStorage } from 'react-native';
 
 export default class ServicesScreen extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      building: {buildingInfo: [{}], apartmentInfo: [{}]}
+    }
     this.emailReport = this.emailReport.bind(this);
     this.emailSuggestion = this.emailSuggestion.bind(this);
     this.emailManager = this.emailManager.bind(this);
+    this._retrieveData = this._retrieveData.bind(this);
+  }
+
+  componentWillMount() {
+    this._retrieveData();
+  }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('UserInfo');
+      if (value !== null) {
+        let isTrue = JSON.parse(value);
+        if (isTrue) {
+          console.log('2222222222222222222222', isTrue, '222222222222222222222');
+        // console.log(isTrue)
+          this.setState({
+            building: isTrue
+          });
+        } else {
+          console.log('was not true', value);
+        } 
+      } else {
+        console.log('The key you searched for doesnt exist');
+      }
+     } catch (error) {
+       console.log("there was an error trying to find things in storage or something", error);
+     }
   }
 
   emailReport() {
@@ -28,7 +58,7 @@ export default class ServicesScreen extends Component {
   }
 
   emailManager() {
-    let email = 'mailto:jmulder@virtualservice.net?subject=Hello Building Manager';
+    let email = `mailto:${this.state.building.buildingInfo[0].MANAGEMENT_EMAIL}?subject=Hello Building Manager`;
     Linking.openURL(email).then((url) => {
         if (url) {
           console.log('Initial url is: ' + url);
@@ -123,7 +153,6 @@ export default class ServicesScreen extends Component {
             <Text style={{fontSize: 14, color: "black"}}>More</Text>
           </TouchableOpacity>
         </View>
-
 
       </View>
       </SafeAreaView>
